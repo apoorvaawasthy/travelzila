@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const destinationSchema = new Schema({
   title: String,
   description: String,
+  image: String,
   location: String,
 });
 

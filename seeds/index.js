@@ -20,6 +20,7 @@ const seedDB = async () => {
     const destination = new Destination({
       location: `${cities[random10].city}, ${cities[random10].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      image: "https://source.unsplash.com/collection/190727/500x500",
     });
     await destination.save();
   }

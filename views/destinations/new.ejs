@@ -1,23 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=, initial-scale=1.0" />
-    <title>New Destination</title>
-  </head>
-  <body>
+<% layout('layouts/boilerplate') %>
+<div class="row">
+  <h1 class="text-center">New Destination</h1>
+  <div class="col-6 offset-3">
     <form action="/destinations" method="POST">
-      <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="destination[title]" />
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="destination[title]"
+        />
       </div>
-      <div>
-        <label for="location">Location</label>
-        <input type="text" id="location" name="destination[location]" />
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="destination[location]"
+        />
       </div>
-      <button>Add Destination</button>
+      <div class="mb-3">
+        <label class="form-label" for="image">Image Url</label>
+        <input
+          class="form-control"
+          type="text"
+          id="image"
+          name="destination[image]"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="destination[description]"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success">Add Destination</button>
+      </div>
     </form>
     <a href="/destinations">All Destinations</a>
-  </body>
-</html>
+  </div>
+</div>
