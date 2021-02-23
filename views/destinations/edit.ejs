@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Destination</h1>
   <div class="col-6 offset-3">
-    <form action="/destinations/<%=destination._id%>?_method=PUT" method="POST">
+    <form
+      action="/destinations/<%=destination._id%>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -11,6 +16,7 @@
           id="title"
           name="destination[title]"
           value="<%=destination.title %>"
+          required
         />
       </div>
       <div class="mb-3">
@@ -21,6 +27,7 @@
           id="location"
           name="destination[location]"
           value="<%=destination.location %>"
+          required
         />
       </div>
       <div class="mb-3">
@@ -31,6 +38,7 @@
           id="image"
           name="destination[image]"
           value="<%=destination.image %>"
+          required
         />
       </div>
 
@@ -41,6 +49,7 @@
           type="text"
           id="description"
           name="destination[description]"
+          required
         >
 <%= destination.description%></textarea
         >
