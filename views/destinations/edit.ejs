@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Edit Destination</title>
+  </head>
+  <body>
+    <h1>Edit destination</h1>
+    <form action="/destinations/<%=destination._id%>?_method=PUT" method="POST">
+      //since forms can make only get and post requests we make a post req in
+      this way
+      <div>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="destination[title]"
+          value="<%=destination.title %>"
+        />
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <input
+          type="text"
+          id="location"
+          name="destination[location]"
+          value="<%=destination.location %>"
+        />
+      </div>
+      <button>Update Destination</button>
+    </form>
+    <a href="/destinations/<%=destination._id%>">Back to Destination</a>
+  </body>
+</html>

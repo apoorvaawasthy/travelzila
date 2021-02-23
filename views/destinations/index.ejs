@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Destinations</title>
+  </head>
+  <body>
+    <h1>All destinations</h1>
+    <div>
+      <a href="/destinations/new">Add a destination</a>
+    </div>
+
+    <ul>
+      <% for(let destination of destinations){%>
+      <li>
+        <a href="/destinations/<%= destination._id %>"
+          ><%= destination.title %></a
+        >
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
