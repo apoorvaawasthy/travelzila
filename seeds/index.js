@@ -18,6 +18,7 @@ const seedDB = async () => {
   for (let i = 0; i < 10; i++) {
     const random10 = Math.floor(Math.random() * 10);
     const destination = new Destination({
+      author: "603683ab7e97f31b58314124",
       location: `${cities[random10].city}, ${cities[random10].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: "https://source.unsplash.com/collection/190727/500x500",

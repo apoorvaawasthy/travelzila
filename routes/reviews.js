@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-
+const { isLoggedIn, isReviewAuthor } = require("../middleware");
 const Destination = require("../models/destination");
 const Review = require("../models/review");
 const ExpressError = require("../utils/ExpressError");
@@ -8,9 +8,11 @@ const catchAsync = require("../utils/catchAsync");
 
 router.post(
   "/",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const destination = await Destination.findById(req.params.id);
     const review = new Review(req.body.review);
+    review.author = req.user._id;
     destination.reviews.push(review);
     await review.save();
     await destination.save();
@@ -19,6 +21,8 @@ router.post(
 );
 router.delete(
   "/:reviewId",
+  isReviewAuthor,
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Destination.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
