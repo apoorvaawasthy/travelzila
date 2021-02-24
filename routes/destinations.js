@@ -16,6 +16,7 @@ router.post(
   catchAsync(async (req, res, next) => {
     const destination = new Destination(req.body.destination);
     await destination.save();
+    req.flash("success", "succesfully added destination!");
     res.redirect(`/destinations/${destination._id}`);
   })
 );
@@ -28,6 +29,10 @@ router.get(
     const destination = await Destination.findById(req.params.id).populate(
       "reviews"
     );
+    if (!destination) {
+      req.flash("error", "Cannot find the destination!");
+      return res.redirect("/destinations");
+    }
     res.render("destinations/show", { destination });
   })
 );
@@ -45,6 +50,7 @@ router.put(
     const destination = await Destination.findByIdAndUpdate(id, {
       ...req.body.destination,
     });
+    req.flash("success", "Sucessfully updated destination!");
     res.redirect(`/destinations/${destination._id}`);
   })
 );
