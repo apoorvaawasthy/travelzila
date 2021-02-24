@@ -8,7 +8,8 @@ const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const Destination = require("./models/destination");
 const Review = require("./models/review");
-
+const destinations = require("./routes/destinations");
+const reviews = require("./routes/reviews");
 mongoose.connect("mongodb://localhost:27017/travelzila", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,82 +25,12 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use("/destinations", destinations);
+app.use("/destinations/:id/reviews", reviews);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
-app.get(
-  "/destinations",
-  catchAsync(async (req, res) => {
-    const destinations = await Destination.find({});
-    res.render("destinations/index", { destinations });
-  })
-);
-app.post(
-  "/destinations",
-  catchAsync(async (req, res, next) => {
-    const destination = new Destination(req.body.destination);
-    await destination.save();
-    res.redirect(`/destinations/${destination._id}`);
-  })
-);
-app.get("/destinations/new", (req, res) => {
-  res.render("destinations/new");
-});
-app.get(
-  "/destinations/:id",
-  catchAsync(async (req, res) => {
-    const destination = await Destination.findById(req.params.id).populate(
-      "reviews"
-    );
-    res.render("destinations/show", { destination });
-  })
-);
-app.get(
-  "/destinations/:id/edit",
-  catchAsync(async (req, res) => {
-    const destination = await Destination.findById(req.params.id);
-    res.render("destinations/edit", { destination });
-  })
-);
-app.put(
-  "/destinations/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const destination = await Destination.findByIdAndUpdate(id, {
-      ...req.body.destination,
-    });
-    res.redirect(`/destinations/${destination._id}`);
-  })
-);
-app.delete(
-  "/destinations/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Destination.findByIdAndDelete(id);
-    res.redirect("/destinations");
-  })
-);
-app.post(
-  "/destinations/:id/reviews",
-  catchAsync(async (req, res) => {
-    const destination = await Destination.findById(req.params.id);
-    const review = new Review(req.body.review);
-    destination.reviews.push(review);
-    await review.save();
-    await destination.save();
-    res.redirect(`/destinations/${destination._id}`);
-  })
-);
-app.delete(
-  "/destinations/:id/reviews/:reviewId",
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Destination.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/destinations/${id}`);
-  })
-);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
