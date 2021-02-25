@@ -1,29 +1,29 @@
+<link rel="stylesheet" href="/stylesheets/index.css" />
 <% layout('layouts/boilerplate') %>
-<h1>All destinations</h1>
-<div>
-  <a href="/destinations/new">Add a destination</a>
-</div>
 
-<ul>
-  <% for(let destination of destinations){%>
-  <div class="card" mb-3>
-    <div class="row">
-      <div class="col-md-4">
-        <img class="img-fluid" alt="" src="<%=destination.images[0].url%>" />
+<span class="text-dark"
+  ><a class="btn btn-outline-secondary btn-rounded" href="/destinations/new"
+    >Add a destination</a
+  ></span
+>
+
+<div class="row text-center flex-wrap">
+  <% destinations.forEach(function(destination){ %>
+  <div class="col-md-3 col-sm-6">
+    <div class="thumbnail">
+      <img src="<%= destination.images[0].url %>" />
+      <div class="caption">
+        <h4><%= destination.location %></h4>
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= destination.title %></h5>
-          <p class="card-text"><%= destination.description %></p>
-          <p class="card-text">
-            <small class="text-muted"><%= destination.location%></small>
-          </p>
-          <a class="btn btn-primary" href="/destinations/<%=destination._id%>"
-            >View <%=destination.title%></a
-          >
-        </div>
-      </div>
+
+      <p>
+        <a
+          href="/destinations/<%= destination._id %>"
+          class="btn btn-success btn-sm"
+          >More Info</a
+        >
+      </p>
     </div>
   </div>
-  <% } %>
-</ul>
+  <% }); %>
+</div>

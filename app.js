@@ -86,6 +86,6 @@ app.use((err, req, res, next) => {
   if (!err.message) err.message = " Something Went Wrong!";
   res.status(statusCode).render("error", { err });
 });
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("Running on 3000");
 });
