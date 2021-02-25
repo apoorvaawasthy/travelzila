@@ -21,7 +21,23 @@ const seedDB = async () => {
       author: "603683ab7e97f31b58314124",
       location: `${cities[random10].city}, ${cities[random10].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "https://source.unsplash.com/collection/190727/500x500",
+      images: [
+        {
+          url:
+            "https://res.cloudinary.com/dp0ljo2ka/image/upload/v1614239345/travelzila/r3rqpcpojxqefhxmy0rc.jpg",
+          filename: "travelzila/r3rqpcpojxqefhxmy0rc",
+        },
+        {
+          url:
+            "https://res.cloudinary.com/dp0ljo2ka/image/upload/v1614239345/travelzila/xw3t4o9cuoyxokqu8ksx.jpg",
+          filename: "travelzila/xw3t4o9cuoyxokqu8ksx",
+        },
+        {
+          url:
+            "https://res.cloudinary.com/dp0ljo2ka/image/upload/v1614239345/travelzila/vuhlxv3kq9s7iys12xpe.jpg",
+          filename: "travelzila/vuhlxv3kq9s7iys12xpe",
+        },
+      ],
     });
     await destination.save();
   }
