@@ -5,29 +5,13 @@ const Destination = require("../models/destination");
 const Review = require("../models/review");
 const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
+const reviews = require("../controllers/reviews");
 
-router.post(
-  "/",
-  isLoggedIn,
-  catchAsync(async (req, res) => {
-    const destination = await Destination.findById(req.params.id);
-    const review = new Review(req.body.review);
-    review.author = req.user._id;
-    destination.reviews.push(review);
-    await review.save();
-    await destination.save();
-    res.redirect(`/destinations/${destination._id}`);
-  })
-);
+router.post("/", isLoggedIn, catchAsync(reviews.createReview));
 router.delete(
   "/:reviewId",
   isReviewAuthor,
   isLoggedIn,
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Destination.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/destinations/${id}`);
-  })
+  catchAsync(reviews.deleteReview)
 );
 module.exports = router;
