@@ -1,13 +1,15 @@
 # travelzila
-A full stack website for travelholics
+### A full stack website for travelholics
 
-Features:
-1.A new user can create an account and add a new Destination._
-2.Multiple images can be added which are displayed as a carousel._
-3.Existing user can login and update and delete the destination added before._
-4.Users can leave a star rating and review for destinations posted by other users_
-5. A user needs to be logged in to create,update or delete destinations_
-6. Authorization enabled so only the user who has created the destination can edit it_
+
+
+## Features:
+* A new user can create an account and add a new Destination.
+* Multiple images can be added which are displayed as a carousel.
+* Existing user can login and update and delete the destination added before.
+* Users can leave a star rating and review for destinations posted by other users
+* A user needs to be logged in to create,update or delete destinations
+* Authorization enabled so only the user who has created the destination can edit it
  
-Tech Stack used:_
+## Tech Stack used:
 HTML,CSS,Node.js,Express.js,MongoDB
